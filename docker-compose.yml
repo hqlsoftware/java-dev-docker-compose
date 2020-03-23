@@ -1,13 +1,40 @@
 version: '2'
 services:
-  #====================================================================================================================#
-  #================================================== tomcat-jre install ==============================================#
-  #====================================================================================================================#
+  # 1.默认: 9000端口  访问地址：http://服务器IP:9000/    ->  修改IP即可
+  nginx:
+    hostname: nginx
+    # only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed
+    container_name: nginx-1.17
+    # 2.解决容器的依赖、启动先后的问题
+    depends_on:
+      - mysql
+      - redis_master
+      - redis_slave
+    # 3.选择自己镜像构建的方式 -> image: 远程仓库拉取 or build:上下文构建(可对项目代码进行)
+    #    image: tomcat:8.5.35-jre8
+    build: ./nginx
+    # 4.可通过./tomcat/conf/server.xml设置服务端口
+    ports:
+      - 9000:80
+    # 5.定义IP网络
+    networks:
+      staticneta:
+        ipv4_address: 172.20.1.2
+    #    - 80:80
+    #    - 443:443
+    # 6.挂载目录
+    volumes:
+      - ./nginx/html:/usr/local/nginx/html
+      - ./nginx/logs:/usr/local/nginx/logs
+      - ./nginx/conf:/usr/local/nginx/conf
+      - ./nginx/sbin:/usr/local/nginx/sbin
+    # 8.生产环境配置：指定容器退出后的重启策略为始终重启, 对保持服务始终运行十分有效
+    restart: always
   # 1.默认: 放置ROOT目录 9001端口  访问地址：http://服务器IP:9001/    ->  修改IP即可
   tomcat:
     hostname: tomcat
     # only [a-zA-Z0-9][a-zA-Z0-9_.-] are allowed
-    container_name: tomcat-8.5.35-jre8
+    container_name: tomcat-9-jre8
     # 2.解决容器的依赖、启动先后的问题
     depends_on:
       - mysql
