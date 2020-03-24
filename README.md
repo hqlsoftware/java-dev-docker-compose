@@ -11,11 +11,13 @@
 
 1. `$ git clone https://github.com/hqlsoftware/javaweb-dev-docker-compose.git`
 2. `$ cd javaweb-dev-docker-compose`
-3. `$ vi init.cnf #配置项目参数`
-4. `$ sh init.sh`
-5. 测试访问（Nginx/Tomcat/Mysql/Redis）是否可以使用
+3. `$ sh init.sh`
 
-运维命令：
+## 文章链接
+- 安装步骤：https://www.toutiao.com/i6807693869518422531/
+- 安装前的准备工作：https://www.toutiao.com/i6807247255288939011/
+
+## 运维命令：
 
 ```
 $ docker-compose help   # docker-compose 命令帮助
@@ -54,7 +56,7 @@ $ docker-compose logs -f
 
 - **JAVA** ：`1.8`
 - **MySQL** ：`8`
-- **Tomcat** ：`8.5.35`
+- **Tomcat** ：`9`
 - **Redis** ：`5.0.2`
 
 版本信息可在 `Dockerfile` 中进行修改，修改 `Dockerfile` 后需要将 `docker-compose` 中的构建方式改为构建本地镜像：
