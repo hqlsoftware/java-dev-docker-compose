@@ -1,5 +1,5 @@
 ## 背景
-利用 docker-compose 快速部署一套Java开发环境（包含Nginx/Tomcat8/Mysql8/Redis5 等软件）。
+利用 docker-compose 快速部署一套Java开发环境（Nginx+Tomcat9+Redis+Mysql8）。
 
 ## 依赖
 
@@ -14,8 +14,8 @@
 3. `$ sh init.sh`
 
 ## 文章链接
-- 安装步骤：https://www.toutiao.com/i6807693869518422531/
 - 安装前的准备工作：https://www.toutiao.com/i6807247255288939011/
+- 安装步骤：https://www.toutiao.com/i6807693869518422531/
 
 ## 运维命令：
 
