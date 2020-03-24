@@ -25,9 +25,9 @@ services:
     #    - 443:443
     # 6.挂载目录
     volumes:
-      - /usr/local/docker/nginx/html:/usr/share/nginx/html
-      - /usr/local/docker/nginx/logs:/usr/local/nginx/logs
-      - /usr/local/docker/nginx/conf:/usr/local/nginx/conf
+      - ./nginx/html:/usr/share/nginx/html
+      - ./nginx/logs:/usr/local/nginx/logs
+      - ./nginx/conf:/usr/local/nginx/conf
     # 8.生产环境配置：指定容器退出后的重启策略为始终重启, 对保持服务始终运行十分有效
     restart: always
   # 1.默认: 放置ROOT目录 9001端口  访问地址：http://服务器IP:9001/    ->  修改IP即可
@@ -54,9 +54,9 @@ services:
     #    - 443:443
     # 6.挂载目录
     volumes:
-      - /usr/local/docker/tomcat/webapps:/usr/local/tomcat/webapps
-      - /usr/local/docker/tomcat/logs:/usr/local/tomcat/logs
-      - /usr/local/docker/tomcat/conf:/usr/local/tomcat/conf
+      - ./tomcat/webapps:/usr/local/tomcat/webapps
+      - ./tomcat/logs:/usr/local/tomcat/logs
+      - ./tomcat/conf:/usr/local/tomcat/conf
     # 7.设置环境变量: 时区与编码
     #   你可以使用数组或字典两种格式
     #   只给定名称的变量会自动获取运行 Compose 主机上对应变量的值，可以用来防止泄露不必要的数据
@@ -94,11 +94,11 @@ services:
       LANG: en_US.UTF-8
     volumes:
       # 4. 指定自定义的mysql配置文件./mysql/conf/custom.cnf启动数据库
-      - /usr/local/docker/mysql/conf:/etc/my.conf.d
+      - ./mysql/conf:/etc/my.conf.d
       # 5. 挂载数据存储目录,持久化数据库.
-      - /usr/local/docker/mysql/data:/var/lib/mysql
+      - ./mysql/data:/var/lib/mysql
       # 6. 挂载数据库定时自动备份目录,见 ./mysql : Dockerfile - > backup.sh ★★★ 填写：备份数据库名/用户名/密码 ★★★
-      - /usr/local/docker/mysql/backup:/backup
+      - ./mysql/backup:/backup
 
     # 7. 挂载日志：通用日志,错误日志,慢日志,二进制日志等 -> 具体可见./mysql/conf/custom.cnf
 
@@ -134,14 +134,14 @@ services:
       staticneta:
         ipv4_address: 172.20.1.5
     volumes:
-      - /usr/local/docker/redis-master/data:/data
+      - ./redis-master/data:/data
       # 3.设置redis配置文件：./redis/conf/redis.conf 默认设置内容如下：
       ### requirepass yourpassword
       ### bind: 0.0.0.0
       ### loglevel notice
       ### logfile "redis.log"
       ### port 9003
-      - /usr/local/docker/redis-master/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-master/conf/redis.conf:/usr/local/etc/redis/redis.conf
     # 生成容器后要执行的命令
     command: redis-server /usr/local/etc/redis/redis.conf
     # 4.设置环境变量: 时区与编码
@@ -166,7 +166,7 @@ services:
       staticneta:
         ipv4_address: 172.20.1.6
     volumes:
-      - /usr/local/docker/redis-slave/data:/data
+      - ./redis-slave/data:/data
       # 3.设置redis配置文件：./redis/conf/redis.conf 默认设置内容如下：
       ### requirepass yourpassword
       ### bind: 0.0.0.0
@@ -175,7 +175,7 @@ services:
       ### port 9004
       ### masterauth yourpassword
       ### slaveof redis_master 9003
-      - /usr/local/docker/redis-slave/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-slave/conf/redis.conf:/usr/local/etc/redis/redis.conf
     # 生成容器后要执行的命令
     command: redis-server /usr/local/etc/redis/redis.conf
     # 4.设置环境变量: 时区与编码
