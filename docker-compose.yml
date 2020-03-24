@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 services:
   # 1.默认: 9000端口  访问地址：http://服务器IP:9000/    ->  修改IP即可
   nginx:
