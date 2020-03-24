@@ -141,7 +141,7 @@ services:
       ### loglevel notice
       ### logfile "redis.log"
       ### port 9003
-      - ./redis-master/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /usr/local/docker/redis-master/conf/redis.conf:/usr/local/etc/redis/redis.conf
     # 生成容器后要执行的命令
     command: redis-server /usr/local/etc/redis/redis.conf
     # 4.设置环境变量: 时区与编码
@@ -175,7 +175,7 @@ services:
       ### port 9004
       ### masterauth yourpassword
       ### slaveof redis_master 9003
-      - ./redis-slave/conf/redis.conf:/usr/local/etc/redis/redis.conf
+      - /usr/local/docker/redis-slave/conf/redis.conf:/usr/local/etc/redis/redis.conf
     # 生成容器后要执行的命令
     command: redis-server /usr/local/etc/redis/redis.conf
     # 4.设置环境变量: 时区与编码
